@@ -53,7 +53,7 @@ $ php artisan serve
 
 Now you can start the API testing at [http://127.0.0.1:8000](http://127.0.0.1:8000)  🙌
 
-## API Endpoints & payload details (You can use Postman or similar tool to test the APIs)
+## API Endpoints & payload details (You can use Postman or similar tool to test the APIs). With every response, appropriate response code will be returned. Below I have shown only success cases in the response payloads. Validations will return appropriate status codes and messages.
 
 1. To get list of all players - 
 
@@ -96,3 +96,71 @@ Response Payload -
 ]
 ```
 
+3. To add a new player - Points count will be set as default to 0 in the table for a new player, so no need to send in the payload.
+
+Type - POST
+URL - http://127.0.0.1:8000/api/createPlayer
+
+Request Payload - 
+
+```
+{
+    "name": "Amrik",
+    "age": "35",
+    "address": "sixth st. Burnaby BC"
+}
+```
+
+Response Payload - 
+
+```
+{
+    "message": "Player record created."
+}
+```
+
+4. To update the points of a specific player. Points will be incremented or decremented according to the operation type sent in the request body. Only 'inc' and 'dec' strings will be accepted for operation type. Player id and operation type will be sent as request payload.
+
+Type - PUT
+URL - http://127.0.0.1:8000/api/updatePointCount
+
+Request Payload - 
+
+```
+{
+    "id": "11",
+    "operationType": "inc"
+}
+```
+
+Response Payload - 
+
+```
+{
+    "message": "Player record updated successfully."
+}
+```
+
+5. To delete a specific player.
+
+Type - DELETE
+URL - http://127.0.0.1:8000/api/deletePlayer
+
+Request Payload - 
+
+```
+{
+    "id": "11"
+}
+```
+
+Response Payload - 
+
+```
+{
+    "message": "Player has been deleted."
+}
+```
+
+
+Thanks!
