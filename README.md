@@ -1,59 +1,98 @@
+<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+
 ## Leaderboard Screen API Documentation
 
-These APIs has been developed in Laravel 7 to serve a Leaderboard Screen. Front-end user can use these endpoints to create, delete and view players. Also there is an endpoint to increase/decrease the points of players on the screen.
+These APIs has been developed in Laravel 7.30.1 to serve a Leaderboard Screen. Front-end user can use these endpoints to create, delete and view players. Also there is an endpoint to increase/decrease the points of players on the screen. 
 
-## How to use
+## Featues
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- To list all the players on the leaderboard sort by their score from higher to lower.
+- To add a new player, whose points will start from 0.
+- To delete a player.
+- To update (increment/decrement) points of the players.
+- To show the details of a specific player.
+- Unit test cases has been written for quick testing - Once application is setup, you can use following command-
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+$ php artisan test
+```
 
-## Laravel Sponsors
+## Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. Clone repository
+```
+$ git clone https://github.com/amrikzira/leaderboard-demo.git
+```
+4. Change into the working directory
+```
+$ cd leaderboard-demo
+```
+5. Copy `.env.example` to `.env` and modify according to your database environment. First you need to cerate an empty MySQL database using phpmyadmin or command-line. Then you need to update the DB_DATABASE value and other db connection related settings in .env file.
+```
+$ cp .env.example .env
+```
+6. Install composer dependencies
+```
+$ composer install
+```
+7. An application key can be generated with the command
+```
+$ php artisan key:generate
+```
+8. Run these commands to create the tables within the defined database.
+```
+$ php artisan migrate
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+## Run
 
-## Contributing
+To start the server
+```
+$ php artisan serve 
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Now you can start the API testing at [http://127.0.0.1:8000](http://127.0.0.1:8000)  🙌
 
-## Code of Conduct
+## API Endpoints & payload details (You can use Postman or similar tool to test the APIs)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. To get list of all players - 
 
-## Security Vulnerabilities
+Type - GET
+URL - http://127.0.0.1:8000/api/getAllPlayers
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Response Payload - 
 
-## License
+```
+[
+    {
+        "id": 1,
+        "name": "Emma",
+        "points": 6
+    },
+    {
+        "id": 4,
+        "name": "William",
+        "points": 6
+    },
+    ...
+]
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. To get a specific player details - 
+
+Type - GET
+URL - http://127.0.0.1:8000/api/getPlayer/3
+
+Response Payload - 
+
+```
+[
+    {
+        "name": "James",
+        "age": 20,
+        "points": 4,
+        "address": "third st. Vancouver BC V3L 4L8"
+    }
+]
+```
+
